@@ -10,42 +10,52 @@ camera.position.setZ(30);
 
 renderer.render(scene, camera);
 
-// Torus (3D Ring) for cool effect
-const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({ color: 0xff00ff });
-const torus = new THREE.Mesh(geometry, material);
+// Background - Anime Cyberpunk City
+const spaceTexture = new THREE.TextureLoader().load('https://i.imgur.com/5K5zX8S.jpg'); // Anime cityscape
+scene.background = spaceTexture;
+
+// Torus (Energy Ring)
+const torusGeometry = new THREE.TorusGeometry(10, 1, 16, 100);
+const torusMaterial = new THREE.MeshBasicMaterial({ color: 0xff007f, wireframe: true });
+const torus = new THREE.Mesh(torusGeometry, torusMaterial);
 scene.add(torus);
 
+// Shuriken (Ninja Star)
+const shurikenGeometry = new THREE.TetrahedronGeometry(5, 0);
+const shurikenMaterial = new THREE.MeshBasicMaterial({ color: 0x00d4ff, wireframe: true });
+const shuriken = new THREE.Mesh(shurikenGeometry, shurikenMaterial);
+shuriken.position.set(0, 0, -10);
+scene.add(shuriken);
+
 // Lighting
-const pointLight = new THREE.PointLight(0x00ffff);
-pointLight.position.set(5, 5, 5);
+const pointLight = new THREE.PointLight(0xff007f, 1, 100);
+pointLight.position.set(10, 10, 10);
 const ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(pointLight, ambientLight);
 
-// Stars (Anime-inspired particles)
-function addStar() {
-    const geometry = new THREE.SphereGeometry(0.25, 24, 24);
-    const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-    const star = new THREE.Mesh(geometry, material);
+// Anime Energy Orbs (Particles)
+function addOrb() {
+    const geometry = new THREE.SphereGeometry(0.3, 16, 16);
+    const material = new THREE.MeshBasicMaterial({ color: Math.random() > 0.5 ? 0xff007f : 0x00d4ff });
+    const orb = new THREE.Mesh(geometry, material);
 
-    const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
-    star.position.set(x, y, z);
-    scene.add(star);
+    const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(80));
+    orb.position.set(x, y, z);
+    scene.add(orb);
 }
 
-Array(200).fill().forEach(addStar);
-
-// Background
-const spaceTexture = new THREE.TextureLoader().load('https://i.imgur.com/8z6K4.jpg'); // Anime-style space bg
-scene.background = spaceTexture;
+Array(150).fill().forEach(addOrb);
 
 // Animation Loop
 function animate() {
     requestAnimationFrame(animate);
 
     torus.rotation.x += 0.01;
-    torus.rotation.y += 0.005;
-    torus.rotation.z += 0.01;
+    torus.rotation.y += 0.01;
+
+    shuriken.rotation.x += 0.02;
+    shuriken.rotation.y += 0.02;
+    shuriken.rotation.z += 0.02;
 
     renderer.render(scene, camera);
 }
