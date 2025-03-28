@@ -2,13 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
 }
 
 body {
     overflow: hidden;
-    background: #0d0d0d;
+    background: #1a0b2e;
     color: #fff;
+    font-family: 'Arial', sans-serif;
 }
 
 .overlay {
@@ -18,24 +18,26 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 10;
-    text-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.8);
 }
 
 h1 {
-    font-size: 4rem;
-    color: #ff00ff;
-    animation: glow 2s infinite alternate;
+    font-size: 5rem;
+    color: #ff007f;
+    text-shadow: 0 0 15px #ff007f, 0 0 30px #00d4ff;
+    animation: neonGlow 1.5s infinite alternate;
 }
 
-h2 {
-    font-size: 2rem;
-    color: #00ffff;
+h2.katakana {
+    font-size: 2.5rem;
+    color: #00d4ff;
+    text-shadow: 0 0 10px #00d4ff;
     margin: 10px 0;
 }
 
-p {
-    font-size: 1.2rem;
+h3 {
+    font-size: 1.5rem;
     color: #fff;
+    text-shadow: 0 0 5px #ff007f;
 }
 
 canvas {
@@ -46,7 +48,7 @@ canvas {
     height: 100vh;
 }
 
-@keyframes glow {
-    0% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
-    100% { text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff; }
+@keyframes neonGlow {
+    0% { text-shadow: 0 0 10px #ff007f, 0 0 20px #00d4ff; }
+    100% { text-shadow: 0 0 20px #ff007f, 0 0 40px #00d4ff; }
 }
